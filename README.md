@@ -35,19 +35,19 @@ taskSchedularApp/
 ```
 Explanation
 
-.idea/ – IDE settings (likely from PyCharm or VS Code)
+- `.idea/` – IDE settings (likely from PyCharm or VS Code)
 
-state_history/ – Stores runtime state/history outputs
+- `state_history/` – Stores runtime state/history outputs
 
-task_scheduler/ – Core Python package with scheduler implementation
+- `task_scheduler/` – Core Python package with scheduler implementation
 
-tests/ – Unit tests
+- `tests/` – Unit tests
 
-main.py – Main runner script
+- `main.py` – Main runner script
 
-README.md – Project documentation
+- `README.md `– Project documentation
 
-PDF report – A report likely for a class/project
+- `PDF report` – A report likely for a class/project
 
 ## Classes Overview
 
