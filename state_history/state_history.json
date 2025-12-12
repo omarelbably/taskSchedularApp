@@ -1,0 +1,42 @@
+{
+  "queue": [
+    {
+      "job_id": 8,
+      "submit_timestamp": "2025-12-12T15:00:17.898783",
+      "status": "queued",
+      "execution_timestamp": null
+    },
+    {
+      "job_id": 101,
+      "submit_timestamp": "2025-12-12T15:00:17.900668",
+      "status": "queued",
+      "execution_timestamp": null
+    },
+    {
+      "job_id": 112,
+      "submit_timestamp": "2025-12-12T15:00:17.900672",
+      "status": "queued",
+      "execution_timestamp": null
+    },
+    {
+      "job_id": 80,
+      "submit_timestamp": "2025-12-12T15:00:17.900674",
+      "status": "queued",
+      "execution_timestamp": null
+    }
+  ],
+  "history": [
+    {
+      "job_id": 10,
+      "submit_timestamp": "2025-12-12T15:00:17.898759",
+      "status": "executed",
+      "execution_timestamp": "2025-12-12T15:00:17.898937"
+    },
+    {
+      "job_id": 15,
+      "submit_timestamp": "2025-12-12T15:00:17.898779",
+      "status": "executed",
+      "execution_timestamp": "2025-12-12T15:00:17.900942"
+    }
+  ]
+}

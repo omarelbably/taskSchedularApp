@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/task_scheduler/main_app.py">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/task_scheduler/main_app.py" />
+              <option name="updatedContent" value="&quot;&quot;&quot;&#10;TaskSchedulerApp - Main runnable class to orchestrate demo/usage&#10;without modifying the underlying single-responsibility classes.&#10;&quot;&quot;&quot;&#10;&#10;from .scheduler import Scheduler&#10;&#10;&#10;class TaskSchedulerApp:&#10;    &quot;&quot;&quot;&#10;    Provides a simple executable wrapper around Scheduler to demonstrate&#10;    submitting, executing, persisting, and reloading tasks.&#10;    &quot;&quot;&quot;&#10;&#10;    def __init__(self, hash_size=7, state_path=&quot;state_history/state_history.json&quot;):&#10;        self.hash_size = hash_size&#10;        self.state_path = state_path&#10;&#10;    def run_demo(self):&#10;        &quot;&quot;&quot;Replicate the demo flow from main.py using a class interface.&quot;&quot;&quot;&#10;        filePath = self.state_path&#10;        scheduler = Scheduler(self.hash_size)&#10;&#10;        scheduler.submit_task(10)&#10;        scheduler.submit_task(15)&#10;        scheduler.submit_task(8)&#10;&#10;        scheduler.show_hash()&#10;        scheduler.show_queue()&#10;&#10;        scheduler.run_next_task()&#10;        scheduler.show_history()&#10;&#10;        scheduler.save_to_file(filePath)&#10;&#10;        new_scheduler = Scheduler(self.hash_size)&#10;        new_scheduler.load_from_file(filePath)&#10;        new_scheduler.show_queue()&#10;        new_scheduler.show_history()&#10;&#10;        scheduler.submit_task(101)&#10;        scheduler.submit_task(112)&#10;        scheduler.submit_task(80)&#10;        scheduler.show_hash()&#10;        scheduler.show_queue()&#10;        scheduler.run_next_task()&#10;        scheduler.show_history()&#10;        scheduler.save_to_file(filePath)&#10;&#10;        new_scheduler.load_from_file(filePath)&#10;        new_scheduler.show_queue()&#10;        new_scheduler.show_history()&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
