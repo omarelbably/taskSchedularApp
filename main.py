@@ -6,16 +6,7 @@ I wrote this in a simple, clean style suitable for a university project.
 Each function now includes full documentation explaining purpose,
 parameters, and return values.
 """
-
-import sys
-sys.path.insert(0, 'src')
-
 from task_scheduler import Scheduler
-
-
-# =====================================================================
-# Demo When Running File Directly
-# =====================================================================
 
 if __name__ == "__main__":
     # Define file path for saving/loading state
