@@ -34,7 +34,7 @@ class HistoryList:
             job (Job): A job that has finished execution.
 
         Returns:
-            None
+            Node: The node that was created and appended to the history list.
         """
         node = Node(job)
         if self.head is None:
@@ -43,6 +43,7 @@ class HistoryList:
         else:
             self.tail.next = node
             self.tail = node
+        return node
 
     def display_history(self):
         """
@@ -85,4 +86,3 @@ class HistoryList:
 
         start_index = max(0, total - n)
         return all_jobs[start_index:]
-

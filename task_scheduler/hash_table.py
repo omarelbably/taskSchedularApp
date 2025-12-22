@@ -38,13 +38,25 @@ class HashTable:
         """
         return job_id % self.size
 
-    def insert(self, job):
+    def _extract_job(self, entry):
+        """
+        Internal helper to normalize stored entries to a Job object.
+        The table may store either Job objects or Node objects (where
+        entry.value is a Job).
+        """
+        # If the entry looks like a Node with a `value` attribute, return that
+        if hasattr(entry, "value") and hasattr(entry.value, "job_id"):
+            return entry.value
+        # Otherwise assume it's a Job-like object
+        return entry
+
+    def insert(self, item):
         """
         Purpose:
-            Insert a job into the hash table unless a duplicate exists.
+            Insert a job or node into the hash table unless a duplicate exists.
 
         Parameters:
-            job (Job)
+            item (Job or Node)
 
         Returns:
             None
@@ -52,14 +64,20 @@ class HashTable:
         Raises:
             ValueError: If job ID already exists in the same bucket.
         """
-        idx = self.hash(job.job_id)
+        # Determine job id from the provided item
+        job_obj = self._extract_job(item)
+        job_id = job_obj.job_id
+
+        idx = self.hash(job_id)
         bucket = self.buckets[idx]
 
-        for j in bucket:
-            if j.job_id == job.job_id:
+        for e in bucket:
+            existing = self._extract_job(e)
+            if existing.job_id == job_id:
                 raise ValueError("Duplicate job ID!")
 
-        bucket.append(job)
+        # Store the original item (so Nodes stay as Nodes, Jobs stay as Jobs)
+        bucket.append(item)
 
     def search(self, job_id):
         """
@@ -73,9 +91,10 @@ class HashTable:
             Job or None: The matching job from the bucket.
         """
         idx = self.hash(job_id)
-        for j in self.buckets[idx]:
-            if j.job_id == job_id:
-                return j
+        for e in self.buckets[idx]:
+            existing = self._extract_job(e)
+            if existing.job_id == job_id:
+                return existing
         return None
 
     def remove(self, job_id):
@@ -93,8 +112,9 @@ class HashTable:
         bucket = self.buckets[idx]
 
         for i in range(len(bucket)):
-            if bucket[i].job_id == job_id:
-                return bucket.pop(i)
+            existing = self._extract_job(bucket[i])
+            if existing.job_id == job_id:
+                removed = bucket.pop(i)
+                return self._extract_job(removed)
 
         return None
-

@@ -54,8 +54,9 @@ class Scheduler:
             raise ValueError("Job already executed earlier.")
 
         job = Job(job_id)
-        self.queue.enqueue(job)
-        self.hash.insert(job)
+        node = self.queue.enqueue(job)
+        # Insert the queue node into the hash so the table references the queue item
+        self.hash.insert(node)
         return job
 
     def find_job(self, job_id):
@@ -72,14 +73,16 @@ class Scheduler:
                 ("history", Job) if found in history
                 None if not found
         """
-        j = self.hash.search(job_id)
-        if j:
-            return ("queue", j)
-
+        # If executed, prefer history lookup
         if job_id in self.executed_ids:
             for x in self.history.display_history():
                 if x.job_id == job_id:
                     return ("history", x)
+
+        # Otherwise check hash table (which stores queue nodes or jobs)
+        j = self.hash.search(job_id)
+        if j:
+            return ("queue", j)
 
         return None
 
@@ -99,13 +102,16 @@ class Scheduler:
             return None
 
         job = self.queue.dequeue()
+        # Remove the queue node (or job) reference from the hash
         self.hash.remove(job.job_id)
 
         print("Executing job:", job.job_id)
         job.status = "executed"
         job.execution_timestamp = datetime.now()
 
-        self.history.add_to_history(job)
+        # Add to history and insert the history node into the hash
+        history_node = self.history.add_to_history(job)
+        self.hash.insert(history_node)
         self.executed_ids.add(job.job_id)
 
         return job
@@ -170,13 +176,14 @@ class Scheduler:
         # Load queue
         for d in data.get("queue", []):
             job = Job.from_dict(d)
-            self.queue.enqueue(job)
-            self.hash.insert(job)
+            node = self.queue.enqueue(job)
+            self.hash.insert(node)
 
         # Load history
         for d in data.get("history", []):
             job = Job.from_dict(d)
-            self.history.add_to_history(job)
+            node = self.history.add_to_history(job)
+            self.hash.insert(node)
             self.executed_ids.add(job.job_id)
 
         print("Loaded from", filename)
@@ -201,6 +208,6 @@ class Scheduler:
         """Print the hash table buckets and stored job IDs."""
         print("Hash table:")
         for i, bucket in enumerate(self.hash.buckets):
-            ids = [j.job_id for j in bucket]
+            ids = [self.hash._extract_job(e).job_id for e in bucket]
             print(i, ":", ids)
 

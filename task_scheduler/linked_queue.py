@@ -35,7 +35,7 @@ class LinkedQueue:
             value (Job): The job to insert.
 
         Returns:
-            None
+            Node: The node that was created and appended to the queue.
         """
         new_node = Node(value)
         if self.head is None:  # First element
@@ -45,6 +45,7 @@ class LinkedQueue:
             self.tail.next = new_node
             self.tail = new_node
         self.size += 1
+        return new_node
 
     def dequeue(self):
         """
@@ -119,4 +120,3 @@ class LinkedQueue:
             out.append(cur.value)
             cur = cur.next
         return out
-

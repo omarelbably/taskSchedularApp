@@ -99,10 +99,12 @@ class TestDequeueing(BaseLoggedTest):
         self.assertIsNotNone(executed)
         self.assertEqual(executed.status, "executed")
         self.assertEqual(len(s.history.display_history()), 1)
-        # Ensure it was removed from hash and queue
-        self.assertIsNone(s.hash.search(5))
+        # Ensure it was removed from the queue
         self.assertEqual([j.job_id for j in s.queue.to_list()], [6])
-        log_success("run_next_task executed Job(5), added to history, removed from hash, and left Job(6) at queue head")
+        # Since HashTable now stores history nodes, the job should still be retrievable
+        self.assertIsNotNone(s.hash.search(5))
+        self.assertEqual(s.hash.search(5).status, "executed")
+        log_success("run_next_task executed Job(5), added to history, and the job remains retrievable from the hash as executed")
 
 
 class TestCollisionHandling(BaseLoggedTest):
