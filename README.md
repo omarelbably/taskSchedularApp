@@ -13,24 +13,41 @@ A simple task scheduling system implemented in Python using linked lists and has
 ## Project Structure
 
 ```
-taskScheduler/
-├── main.py                      # Entry point with demo code
-├── README.md                    # Project documentation
-├── task_scheduler/              # Main package containing all classes
-│   ├── __init__.py              # Package exports
-│   ├── job.py                   # Job class - represents a single job
-│   ├── node.py                  # Node class - linked list node
-│   ├── linked_queue.py          # LinkedQueue class - FIFO queue implementation
-│   ├── history_list.py          # HistoryList class - executed jobs tracking
-│   ├── hash_table.py            # HashTable class - duplicate checking with chaining
-│   └── scheduler.py             # Scheduler class - main controller
+taskSchedularApp/
+├── .idea/
+│   └── (IDE configuration files)
+├── state_history/
+│   └── (history/state files)
+├── task_scheduler/
+│   ├── __init__.py
+│   ├── job.py
+│   ├── node.py
+│   ├── linked_queue.py
+│   ├── history_list.py
+│   ├── hash_table.py
+│   └── scheduler.py
 ├── tests/
-│   └── test_task_scheduler.py   # Unit tests (insertion, searching, dequeueing, collisions)
-├── state/                       # Package reserved for output state artifacts
-│   └── __init__.py
-└── state_history/               # Exported state files
-    └── state_history.json       # Saved scheduler state (queue + history)
+│   └── (test files)
+├── Data Structure project 1 report.pdf
+├── README.md
+└── main.py
+
 ```
+Explanation
+
+- `.idea/` – IDE settings (likely from PyCharm or VS Code)
+
+- `state_history/` – Stores runtime state/history outputs
+
+- `task_scheduler/` – Core Python package with scheduler implementation
+
+- `tests/` – Unit tests
+
+- `main.py` – Main runner script
+
+- `README.md `– Project documentation
+
+- `PDF report` – A report likely for a class/project
 
 ## Classes Overview
 
